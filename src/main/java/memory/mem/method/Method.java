@@ -1,5 +1,6 @@
 package memory.mem.method;
 
+import memory.mem.jvm.JVM;
 import memory.mem.base.CObject;
 import memory.mem.base.Type;
 
@@ -13,7 +14,7 @@ public final class Method extends CObject {
         _code, _from_interpreted_entry;
 
         private long offset = 0L;
-        private static final Type METHOD = jvm.type("Method");
+        private static final Type METHOD = JVM.type("Method");
 
         public long offset() {
             if (offset == 0L) {

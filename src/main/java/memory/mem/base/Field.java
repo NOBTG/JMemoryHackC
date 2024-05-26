@@ -1,18 +1,6 @@
 package memory.mem.base;
 
-public final class Field implements Comparable<Field> {
-    public final String name;
-    public final String typeName;
-    public final long offset;
-    public final boolean isStatic;
-
-    public Field(String name, String typeName, long offset, boolean isStatic) {
-        this.name = name;
-        this.typeName = typeName;
-        this.offset = offset;
-        this.isStatic = isStatic;
-    }
-
+public record Field(String name, String typeName, long offset, boolean isStatic) implements Comparable<Field> {
     @Override
     public int compareTo(Field o) {
         if (isStatic != o.isStatic) {

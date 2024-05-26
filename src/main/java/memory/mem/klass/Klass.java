@@ -1,6 +1,7 @@
 package memory.mem.klass;
 
 import memory.mem.CTool;
+import memory.mem.jvm.JVM;
 import memory.mem.base.CObject;
 import memory.mem.base.Type;
 
@@ -14,7 +15,7 @@ public final class Klass extends CObject {
 
         private Optional<String> name = Optional.empty();
         private long offset = 0L;
-        private static final Type KLASS = jvm.type("Klass");
+        private static final Type KLASS = JVM.type("Klass");
 
         CField(String name) {
             this.name = Optional.of(name);

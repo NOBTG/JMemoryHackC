@@ -1,49 +1,28 @@
 package memory.mem.base;
 
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
-public final class Type {
-    private static final Field[] NO_FIELDS = new Field[0];
-    public final String name;
-    public final String superName;
-    public final int size;
-    public final boolean isOop;
-    public final boolean isInt;
-    public final boolean isUnsigned;
-    public final Field[] fields;
-
-    public Type(String name, String superName, int size, boolean isOop, boolean isInt, boolean isUnsigned, Set<Field> fields) {
-        this.name = name;
-        this.superName = superName;
-        this.size = size;
-        this.isOop = isOop;
-        this.isInt = isInt;
-        this.isUnsigned = isUnsigned;
-        this.fields = fields == null ? NO_FIELDS : fields.toArray(new Field[0]);
-    }
+public record Type(String name, String superName, int size, boolean isOop, boolean isInt, boolean isUnsigned, Set<Field> fields) {
+    private static final Set<Field> NO_FIELDS = Set.of();
+    private static final Map<Type, Set<Field>> fieldsByType = new HashMap<>();
 
     public Field field(String name) {
-        for (Field field : fields) {
-            if (field.name.equals(name)) {
-                return field;
-            }
-        }
-        throw new NoSuchElementException("No such field: " + name);
+        fieldsByType.putIfAbsent(this, fields == null ? NO_FIELDS : Set.copyOf(fields));
+        return fieldsByType.get(this).stream().filter(f -> f.name().equals(name)).findFirst().orElseThrow(() -> new NoSuchElementException("No such field: " + name));
     }
 
     public long global(String name) {
         Field field = field(name);
-        if (field.isStatic) {
-            return field.offset;
+        if (field.isStatic()) {
+            return field.offset();
         }
         throw new IllegalArgumentException("Static field expected");
     }
 
     public long offset(String name) {
         Field field = field(name);
-        if (!field.isStatic) {
-            return field.offset;
+        if (!field.isStatic()) {
+            return field.offset();
         }
         throw new IllegalArgumentException("Instance field expected");
     }

@@ -1,5 +1,6 @@
 package memory.mem.array;
 
+import memory.mem.jvm.JVM;
 import memory.mem.base.CObject;
 import memory.mem.base.Type;
 
@@ -9,7 +10,7 @@ import java.util.function.Function;
 public final class Array extends CObject {
     public Array(long ptr, String name) {
         super(ptr);
-        CField.ARRAY = jvm.type("Array<".concat(name).concat(">"));
+        CField.ARRAY = JVM.type("Array<".concat(name).concat(">"));
     }
 
     public enum CField {

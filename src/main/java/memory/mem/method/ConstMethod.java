@@ -1,5 +1,6 @@
 package memory.mem.method;
 
+import memory.mem.jvm.JVM;
 import memory.mem.base.CObject;
 import memory.mem.base.Type;
 
@@ -11,7 +12,7 @@ public final class ConstMethod extends CObject {
         _fingerprint, _constants, _stackmap_data, _constMethod_size, _flags, _code_size, _name_index, _signature_index, _method_idnum, _max_stack, _max_locals, _size_of_parameters;
 
         private long offset = 0L;
-        private static final Type CONST_METHOD = jvm.type("ConstMethod");
+        private static final Type CONST_METHOD = JVM.type("ConstMethod");
 
         public long offset() {
             if (offset == 0L) {

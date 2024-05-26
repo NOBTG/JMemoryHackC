@@ -1,9 +1,6 @@
 package memory.mem.base;
 
-import memory.mem.JVM;
-
 public abstract class CBase {
-    protected static final JVM jvm = JVM.INSTANCE;
     private final long ptr;
 
     public CBase(long ptr) {
