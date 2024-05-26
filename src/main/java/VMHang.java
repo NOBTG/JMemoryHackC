@@ -1,5 +1,3 @@
-package org.example;
-
 import memory.me.xdark.shell.ShellcodeRunner;
 
 import java.io.IOException;
@@ -18,7 +16,7 @@ public class VMHang {
         }
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         K.a();
         System.out.println(K.b());
         System.out.println(K.c());

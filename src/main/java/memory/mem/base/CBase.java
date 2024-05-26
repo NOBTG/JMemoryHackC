@@ -1,6 +1,6 @@
 package memory.mem.base;
 
-import memory.one.helfy.JVM;
+import memory.mem.JVM;
 
 public abstract class CBase {
     protected static final JVM jvm = JVM.INSTANCE;

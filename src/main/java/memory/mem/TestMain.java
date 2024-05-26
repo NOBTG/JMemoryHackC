@@ -2,10 +2,7 @@ package memory.mem;
 
 import memory.mem.array.Array;
 import memory.mem.klass.InstanceKlass;
-import memory.mem.method.ConstMethod;
-import memory.mem.method.Method;
-import memory.one.helfy.Field;
-import memory.one.helfy.JVM;
+import memory.mem.base.Field;
 
 public final class TestMain {
     private static class K {}

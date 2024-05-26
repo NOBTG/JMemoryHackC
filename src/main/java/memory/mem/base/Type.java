@@ -1,4 +1,4 @@
-package memory.one.helfy;
+package memory.mem.base;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -13,7 +13,7 @@ public final class Type {
     public final boolean isUnsigned;
     public final Field[] fields;
 
-    Type(String name, String superName, int size, boolean isOop, boolean isInt, boolean isUnsigned, Set<Field> fields) {
+    public Type(String name, String superName, int size, boolean isOop, boolean isInt, boolean isUnsigned, Set<Field> fields) {
         this.name = name;
         this.superName = superName;
         this.size = size;

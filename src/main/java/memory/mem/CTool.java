@@ -1,7 +1,6 @@
 package memory.mem;
 
-import memory.one.helfy.JVM;
-import memory.one.helfy.Type;
+import memory.mem.base.Type;
 import sun.misc.Unsafe;
 
 import java.nio.charset.StandardCharsets;
@@ -40,7 +39,7 @@ public final class CTool {
     }
 
     public static long getPtr(Object obj) {
-        Unsafe unsafe = JVM.getUnsafe();
+        Unsafe unsafe = JVM.unsafe;
         if (CTool.is64BitVM) {
             return unsafe.getLong(obj, klassOffset);
         } else {

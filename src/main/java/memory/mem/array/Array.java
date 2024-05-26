@@ -1,7 +1,7 @@
 package memory.mem.array;
 
 import memory.mem.base.CObject;
-import memory.one.helfy.Type;
+import memory.mem.base.Type;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;

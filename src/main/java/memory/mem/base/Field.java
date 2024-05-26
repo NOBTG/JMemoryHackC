@@ -1,4 +1,4 @@
-package memory.one.helfy;
+package memory.mem.base;
 
 public final class Field implements Comparable<Field> {
     public final String name;
@@ -6,7 +6,7 @@ public final class Field implements Comparable<Field> {
     public final long offset;
     public final boolean isStatic;
 
-    Field(String name, String typeName, long offset, boolean isStatic) {
+    public Field(String name, String typeName, long offset, boolean isStatic) {
         this.name = name;
         this.typeName = typeName;
         this.offset = offset;

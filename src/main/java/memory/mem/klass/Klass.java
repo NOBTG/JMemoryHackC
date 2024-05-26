@@ -2,7 +2,7 @@ package memory.mem.klass;
 
 import memory.mem.CTool;
 import memory.mem.base.CObject;
-import memory.one.helfy.Type;
+import memory.mem.base.Type;
 
 import java.util.*;
 import java.util.function.BiConsumer;
