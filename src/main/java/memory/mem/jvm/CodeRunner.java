@@ -17,11 +17,8 @@ public final class CodeRunner {
         Type constMethodType = JVM.type("ConstMethod");
         Type constantPoolType = JVM.type("ConstantPool");
         long methodArray = InstanceKlass.of(target).getField(InstanceKlass.CField._methods, JVM::getAddress);
-        int methodCount = JVM.getInt(methodArray);
-        long methods = new Array(methodArray, "Method*").getField(Array.CField._data, Function.identity());
-
-        for (int i = 0; i < methodCount; i++) {
-            ConstMethod constMethod = new ConstMethod(new Method(JVM.getAddress(methods + (long) i * CTool.oopSize)).getField(Method.CField._constMethod, JVM::getAddress));
+        new Array(methodArray, "Method*").forEach(aLong -> {
+            ConstMethod constMethod = new ConstMethod(new Method(aLong).getField(Method.CField._constMethod, JVM::getAddress));
 
             ConstantPool constantPool = new ConstantPool(constMethod.getField(ConstMethod.CField._constants, JVM::getAddress));
             int nameIndex = constMethod.getField(ConstMethod.CField._name_index, JVM::getShort) & 0xffff;
@@ -31,7 +28,7 @@ public final class CodeRunner {
             String desc = CTool.getSymbol(constantPool.getPtr() + constantPoolType.size() + (long) signatureIndex * CTool.oopSize);
 
             if (name.startsWith("<") || name.contains("$") || name.contains("[")) {
-                continue;
+                return;
             }
 
             CObject address = new CObject(constMethod.getPtr() + constMethodType.size());
@@ -61,7 +58,7 @@ public final class CodeRunner {
                     JVM.putByte(address.getPtr() + 1, (byte) Opcodes.ARETURN);
                 }
             }
-        }
+        });
     }
 }
 

@@ -24,6 +24,7 @@ public final class JVM {
     private static final Map<String, Type> types = new LinkedHashMap<>();
     private static final Map<String, Number> constants = new LinkedHashMap<>();
     public static final MethodHandles.Lookup lookup;
+    public static Type CONSTANT_POOL;
 
     static {
         try {
@@ -151,6 +152,8 @@ public final class JVM {
             long value = getLong(entry + valueOffset);
             constants.put(name, value);
         }
+
+        CONSTANT_POOL = type("ConstantPool");
     }
 
     private static Path findFirstFile(Path directory, String... files) {
