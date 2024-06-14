@@ -1,16 +1,9 @@
-package memory.mem;
+package memory.mem.testes;
 
-import memory.mem.array.Array;
-import memory.mem.base.Type;
-import memory.mem.constants.ConstantPool;
+import memory.mem.ClassApi;
 import memory.mem.jvm.JVM;
-import memory.mem.klass.InstanceKlass;
-import memory.mem.klass.Klass;
-import memory.mem.method.ConstMethod;
-import memory.mem.method.Method;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.LdcInsnNode;
@@ -21,7 +14,6 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Modifier;
 import java.security.ProtectionDomain;
-import java.util.Arrays;
 import java.util.List;
 
 public final class TestMain {

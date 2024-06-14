@@ -1,4 +1,6 @@
-package memory.mem;
+package memory.mem.testes;
+
+import memory.mem.ClassApi;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;

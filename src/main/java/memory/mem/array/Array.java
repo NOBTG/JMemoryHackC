@@ -10,37 +10,28 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public final class Array extends CObject {
+    private final long DATA_OFFSET;
+
     public Array(long ptr, String name) {
         super(ptr);
-        CField.ARRAY = JVM.type("Array<".concat(name).concat(">"));
+        DATA_OFFSET = JVM.type("Array<".concat(name).concat(">")).offset("_data");
     }
 
-    public enum CField {
-        _data;
-
-        private long offset = 0L;
-        private static Type ARRAY;
-
-        public long offset() {
-            if (offset == 0L) {
-                this.offset = ARRAY.offset(this.name());
-            }
-            return offset;
+    public void forEach(BiConsumer<Long, Integer> addr) {
+        for (int i = 0; i < JVM.getInt(getPtr()); i++) {
+            addr.accept(JVM.getAddress(DATA_OFFSET + (long) i * CTool.oopSize), i);
         }
-    }
-
-    public <t> t getField(CField field, Function<Long, t> c) {
-        return c.apply(getPtr() + field.offset());
-    }
-
-    public <t> void putField(CField field, t obj, BiConsumer<Long, t> c) {
-        c.accept(getPtr() + field.offset(), obj);
     }
 
     public void forEach(Consumer<Long> addr) {
-        long data = getField(CField._data, Function.identity());
-        for (int i = 0; i < JVM.getInt(getPtr()); i++) {
-            addr.accept(JVM.getAddress(data + (long) i * CTool.oopSize));
-        }
+        forEach((aLong, integer) -> addr.accept(aLong));
+    }
+
+    public byte get(int index) {
+        return JVM.getByte(getPtr() + DATA_OFFSET + index);
+    }
+
+    public void set(int index, byte val) {
+        JVM.putByte(getPtr() + DATA_OFFSET + index, val);
     }
 }
